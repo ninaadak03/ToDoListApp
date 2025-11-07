@@ -1,0 +1,9 @@
+<div class="register">
+  <h2>Register</h2>
+  <form (submit)="submit()">
+    <input placeholder="Name" [(ngModel)]="name" name="name" />
+    <input placeholder="Email" [(ngModel)]="email" name="email" />
+    <input placeholder="Password" type="password" [(ngModel)]="password" name="password" />
+    <button type="submit">Register</button>
+  </form>
+</div>

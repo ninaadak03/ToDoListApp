@@ -1,5 +1,14 @@
 export interface Category {
-  id: string;
+  id: number;
   name: string;
-  color?: string;
+  userId: number;
+}
+
+export interface CreateCategoryRequest {
+  name: string;
+}
+
+export interface UpdateCategoryRequest {
+  id: number;
+  name: string;
 }

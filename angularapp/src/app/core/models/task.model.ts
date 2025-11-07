@@ -1,8 +1,24 @@
 export interface Task {
-  id: string;
+  id: number;
   title: string;
-  description?: string;
-  completed: boolean;
-  categoryId?: string;
-  dueDate?: string; // ISO date
+  description: string;
+  isCompleted: boolean;
+  categoryId: number;
+  categoryName?: string;
+  createdDate: Date;
+  userId: number;
+}
+
+export interface CreateTaskRequest {
+  title: string;
+  description: string;
+  categoryId: number;
+}
+
+export interface UpdateTaskRequest {
+  id: number;
+  title: string;
+  description: string;
+  isCompleted: boolean;
+  categoryId: number;
 }

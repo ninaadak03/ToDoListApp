@@ -1,0 +1,45 @@
+<!-- src/app/components/categories/category-form/category-form.component.html -->
+
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>{{ category ? 'Edit Category' : 'Create New Category' }}</h3>
+      <button class="btn-close" (click)="onClose()">×</button>
+    </div>
+
+    <form #categoryForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="categoryName">Category Name</label>
+        <input 
+          type="text" 
+          id="categoryName" 
+          name="categoryName"
+          [(ngModel)]="categoryName"
+          required
+          minlength="2"
+          #name="ngModel"
+          placeholder="Enter category name"
+          [disabled]="isLoading"
+          autofocus>
+        <div class="error-message" *ngIf="name.invalid && name.touched">
+          <small *ngIf="name.errors?.['required']">Category name is required</small>
+          <small *ngIf="name.errors?.['minlength']">Category name must be at least 2 characters</small>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="onClose()" [disabled]="isLoading">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid || isLoading">
+          <span *ngIf="!isLoading">{{ category ? 'Update' : 'Create' }}</span>
+          <span *ngIf="isLoading">Saving...</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

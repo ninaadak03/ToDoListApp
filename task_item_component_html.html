@@ -1,0 +1,29 @@
+<!-- src/app/components/tasks/task-item/task-item.component.html -->
+
+<div class="task-card" [class.completed]="task.isCompleted">
+  <div class="task-header">
+    <div class="task-checkbox">
+      <input 
+        type="checkbox" 
+        [checked]="task.isCompleted"
+        (change)="onToggleComplete()"
+        id="task-{{ task.id }}">
+      <label [for]="'task-' + task.id"></label>
+    </div>
+    <span class="task-category" *ngIf="task.categoryName">{{ task.categoryName }}</span>
+  </div>
+
+  <div class="task-content">
+    <h4 [class.completed-text]="task.isCompleted">{{ task.title }}</h4>
+    <p [class.completed-text]="task.isCompleted">{{ task.description }}</p>
+  </div>
+
+  <div class="task-actions">
+    <button class="btn-icon btn-edit" (click)="onEdit()" [disabled]="isDeleting">
+      <span>✏️</span>
+    </button>
+    <button class="btn-icon btn-delete" (click)="onDelete()" [disabled]="isDeleting">
+      <span>🗑️</span>
+    </button>
+  </div>
+</div>

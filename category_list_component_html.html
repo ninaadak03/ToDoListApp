@@ -1,0 +1,40 @@
+<!-- src/app/components/categories/category-list/category-list.component.html -->
+
+<div class="category-list-container">
+  <div class="category-list-header">
+    <h3>Categories</h3>
+    <button class="btn-add" (click)="openCategoryForm()" title="Add Category">+</button>
+  </div>
+
+  <div class="category-items">
+    <div 
+      class="category-item" 
+      [class.active]="selectedCategoryId === null"
+      (click)="selectCategory(null)">
+      <span class="category-name">All Tasks</span>
+    </div>
+
+    <div 
+      *ngFor="let category of categories"
+      class="category-item" 
+      [class.active]="selectedCategoryId === category.id"
+      (click)="selectCategory(category.id)">
+      <span class="category-name">{{ category.name }}</span>
+      <div class="category-actions" (click)="$event.stopPropagation()">
+        <button class="btn-icon-small" (click)="onEditCategory(category, $event)" title="Edit">✏️</button>
+        <button class="btn-icon-small" (click)="onDeleteCategory(category.id, $event)" title="Delete">🗑️</button>
+      </div>
+    </div>
+
+    <div *ngIf="categories.length === 0" class="empty-categories">
+      <p>No categories yet. Create your first one!</p>
+    </div>
+  </div>
+</div>
+
+<app-category-form
+  *ngIf="showCategoryForm"
+  [category]="editingCategory"
+  (close)="onCategoryFormClose()"
+  (saved)="onCategorySaved()">
+</app-category-form>

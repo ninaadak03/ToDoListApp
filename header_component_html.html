@@ -1,0 +1,30 @@
+<!-- src/app/components/layout/header/header.component.html -->
+
+<header class="header">
+  <div class="header-content">
+    <div class="header-left">
+      <h1>📝 Task Manager</h1>
+    </div>
+
+    <div class="header-right">
+      <div class="user-menu" *ngIf="currentUser">
+        <button class="user-button" (click)="toggleUserMenu()">
+          <span class="user-avatar">{{ currentUser.username.charAt(0).toUpperCase() }}</span>
+          <span class="user-name">{{ currentUser.username }}</span>
+        </button>
+
+        <div class="dropdown-menu" *ngIf="showUserMenu">
+          <div class="dropdown-item user-info">
+            <p class="user-email">{{ currentUser.email }}</p>
+          </div>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item logout-btn" (click)="logout()">
+            <span>🚪</span> Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="dropdown-backdrop" *ngIf="showUserMenu" (click)="toggleUserMenu()"></div>

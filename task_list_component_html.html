@@ -1,0 +1,52 @@
+<!-- src/app/components/tasks/task-list/task-list.component.html -->
+
+<div class="task-list-container">
+  <div class="task-list-header">
+    <h2>My Tasks</h2>
+    <button class="btn btn-primary" (click)="openTaskForm()">+ Add Task</button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <p>Loading tasks...</p>
+  </div>
+
+  <div *ngIf="!isLoading && tasks.length === 0" class="empty-state">
+    <p>No tasks found. Create your first task!</p>
+  </div>
+
+  <div *ngIf="!isLoading && tasks.length > 0">
+    <div class="task-section" *ngIf="pendingTasks.length > 0">
+      <h3>Pending ({{ pendingTasks.length }})</h3>
+      <div class="tasks-grid">
+        <app-task-item 
+          *ngFor="let task of pendingTasks"
+          [task]="task"
+          (edit)="onEditTask($event)"
+          (delete)="onTaskDeleted()"
+          (toggleComplete)="onTaskToggled()">
+        </app-task-item>
+      </div>
+    </div>
+
+    <div class="task-section" *ngIf="completedTasks.length > 0">
+      <h3>Completed ({{ completedTasks.length }})</h3>
+      <div class="tasks-grid">
+        <app-task-item 
+          *ngFor="let task of completedTasks"
+          [task]="task"
+          (edit)="onEditTask($event)"
+          (delete)="onTaskDeleted()"
+          (toggleComplete)="onTaskToggled()">
+        </app-task-item>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-task-form
+  *ngIf="showTaskForm"
+  [task]="editingTask"
+  [categories]="categories"
+  (close)="onTaskFormClose()"
+  (saved)="onTaskSaved()">
+</app-task-form>

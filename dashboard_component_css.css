@@ -1,0 +1,41 @@
+/* src/app/components/dashboard/dashboard.component.css */
+
+.dashboard-container {
+  min-height: calc(100vh - 70px);
+  background-color: #f5f7fa;
+  padding-top: 70px;
+}
+
+.dashboard-content {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 20px;
+}
+
+.sidebar {
+  width: 300px;
+  min-width: 300px;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 968px) {
+  .dashboard-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-content {
+    padding: 10px;
+  }
+}
